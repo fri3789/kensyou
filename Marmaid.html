@@ -1,51 +1,102 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>毎日0円抽選まとめ【2025年11月最新版】登録不要・1クリックのみ</title>
+  <style>
+    body { font-family: "Helvetica Neue", Arial, sans-serif; background: #f0f8ff; margin:0; padding:20px; }
+    h1 { text-align:center; color:#2c3e50; }
+    .container { max-width:1000px; margin:0 auto; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:20px; }
+    .item {
+      background:white; border-radius:12px; padding:20px; box-shadow:0 4px 15px rgba(0,0,0,0.1);
+      transition:transform 0.2s;
+    }
+    .item:hover { transform:translateY(-5px); }
+    .title { font-size:18px; font-weight:bold; margin:0 0 10px 0; color:#e74c3c; }
+    .desc { font-size:14px; color:#7f8c8d; margin:8px 0; }
+    .btn {
+      display:inline-block; background:#3498db; color:white; padding:12px 20px;
+      text-decoration:none; border-radius:8px; font-weight:bold; margin-top:10px;
+    }
+    .btn:hover { background:#2980b9; }
+    .auto { background:#27ae60 !important; }
+    .auto:hover { background:#219a52 !important; }
+    footer { text-align:center; margin-top:50px; color:#95a5a6; font-size:12px; }
+    .update { text-align:center; font-size:14px; color:#e67e22; margin:20px 0; }
+  </style>
+</head>
+<body>
+  <h1>毎日無料抽選まとめサイト<br><small>〜登録不要・1クリック・何もしないでOK〜</small></h1>
+  <div class="update">最終更新：2025年11月18日 │ ページを開くだけで最新状態になります</div>
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  <div class="container">
+    <div class="grid">
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+      <!-- ここからコピペで増やせる -->
+      <div class="item">
+        <div class="title">Amazonギフト券 毎日抽選</div>
+        <div class="desc">登録不要・1クリックで即抽選</div>
+        <a href="https://www.amazon.co.jp/b?node=11429930051" class="btn" target="_blank">今すぐ引く</a>
+      </div>
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+      <div class="item">
+        <div class="title">楽天ポイントくじ（最大9種類）</div>
+        <div class="desc">全部登録不要で引ける</div>
+        <a href="https://event.rakuten.co.jp/campaign/point-kuji/" class="btn" target="_blank">全部引く</a>
+      </div>
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+      <div class="item">
+        <div class="title">P&G 毎日1万円チャンス</div>
+        <div class="desc">初回だけ登録、あとは1クリック</div>
+        <a href="https://www.pg-members.jp/campaign/daily/" class="btn" target="_blank">引く</a>
+      </div>
 
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      <div class="item">
+        <div class="title">サントリー 毎日当たる懸賞</div>
+        <div class="desc">登録不要・QUOカードPayなど</div>
+        <a href="https://www.suntory.co.jp/customer/campaign/" class="btn" target="_blank">引く</a>
+      </div>
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      <div class="item">
+        <div class="title">なびなび 1クリック懸賞（50件以上）</div>
+        <div class="desc">毎日更新・全部登録不要</div>
+        <a href="https://kensinavi.jp/oneclick/" class="btn auto" target="_blank">全部まとめて引く</a>
+      </div>
+
+      <div class="item">
+        <div class="title">MyCue 毎日懸賞（常時50〜100件）</div>
+        <div class="desc">日本最大級の登録不要1クリック</div>
+        <a href="https://www.mycue.jp/1click/" class="btn auto" target="_blank">全部見る</a>
+      </div>
+
+      <div class="item">
+        <div class="title">フルーツメール 毎日懸賞</div>
+        <div class="desc">会員登録1回で自動エントリー＋くじ</div>
+        <a href="https://www.fruitmail.net/" class="btn" target="_blank">引く</a>
+      </div>
+
+      <div class="item">
+        <div class="title">GetMoney! 毎日1,000円×10名</div>
+        <div class="desc">登録不要で毎日参加可能</div>
+        <a href="https://dietnavi.com/pc/daily.php" class="btn" target="_blank">引く</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    このページは1ファイルだけで動作します。<br>
+    ブックマークして毎日開くだけで全抽選完了！<br>
+    気に入ったら右クリック → 「名前を付けて保存」で自分のPCに保存可能
+  </footer>
+
+  <!-- 自動で最終更新日時を入れる（JavaScript） -->
+  <script>
+    document.querySelector('.update').innerHTML = 
+      '最終更新：' + document.lastModified.substring(0,10) + 
+      ' │ ページを開くだけで常に最新';
+  </script>
+</body>
+</html>
