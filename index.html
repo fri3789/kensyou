@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HunterAI - 完璧懸賞＆アンケートリサーチサイト（2025年11月20日最新）</title>
+  <title>HunterAI - 完璧懸賞リサーチサイト（アンケート系は懸賞形式のみ）</title>
   <style>
     :root { --p:#8b5cf6; --bg:#0c0a1f; --c:#221f47; --t:#f0e6ff; --glow:rgba(139,92,246,0.3); --success:#10b981; }
     *{margin:0;padding:0;box-sizing:border-box}
@@ -27,20 +27,20 @@
     .btn{display:block;margin-top:1rem;padding:1rem;background:var(--p);color:white;border-radius:50px;text-decoration:none;font-weight:bold}
     .error{display:none;color:#ff4d4d;padding:1rem}
     footer{text-align:center;padding:2rem;color:#888;font-size:0.9rem}
+    h2 {margin-top: 2rem; font-size: 1.8rem; color: var(--p);}
     @media (max-width:768px){.res{grid-template-columns:1fr}.card{padding:1rem}}
   </style>
 </head>
 <body>
-  <!-- タイトルクリックでトップに戻るようにheader全体をクリック可能に -->
   <header onclick="resetPage()">
     <div class="logo">HunterAI</div>
     <div class="status"><span id="status-text"></span><div class="dot"></div></div>
   </header>
   <main>
-    <h1>完璧懸賞＆アンケートリサーチサイト</h1>
-    <p>2025年11月20日最新！懸賞＋人気アンケートサイトを徹底収集</p>
+    <h1>完璧懸賞リサーチサイト</h1>
+    <p>2025年11月20日最新！「アンケートで抽選・必ずもらえる」懸賞を徹底収集<br>ポイント貯めるだけのアンケートサイトは一切排除しました</p>
     <div class="search">
-      <input type="text" id="kw" placeholder="現金 / Amazonギフト / 必ずもらえる / マクロミル / infoQ">
+      <input type="text" id="kw" placeholder="現金 / Amazon / 必ずもらえる / ライオン / ネピア">
     </div>
     <div class="think" id="think">
       <div class="spin"></div>
@@ -54,15 +54,38 @@
   </footer>
 
   <script>
+    // すべて「アンケートで懸賞が当たる」または「必ずもらえる」形式のみ厳選（ポイント貯め系は完全排除）
+    // ジャンル追加: '現金', 'ポイント', '物品', '無料商品' など
+    // リストを拡張し、実用的な（必ずもらえる優先）ものを先にソート
     const campaigns = [
-      {t:"マクロミル（国内No.1アンケート）",p:"1P=1円・毎日10件以上",u:"https://monitor.macromill.com/"},
-      {t:"infoQ（GMO運営・高単価）",p:"現金/ギフト交換",u:"https://infoq.jp/"},
-      {t:"ECナビアンケート",p:"リサーチパネル連携",u:"https://ecnavi.jp/research/"},
-      {t:"ポイントタウンアンケート",p:"簡単アンケート多数",u:"https://www.pointtown.com/"},
-      {t:"キューモニター",p:"高単価・座談会あり",u:"https://www.qmonitor.jp/"},
-      {t:"ライオン 最大30%必ず戻ってくる",p:"デジタルポイント600pt",u:"https://lsp-campaign.com/homecare-receiptcp-2/lp.go"},
-      {t:"ネピア 目黒蓮クリアファイル毎週先着",p:"クリアファイル",u:"https://e-nepia.com/campaign/cp2025.html"},
-      {t:"Kenvue えらべるPay20%還元",p:"最大2,000pt",u:"https://campaign-ssl.com/selectpaycp/A01.php"}
+      {t:"ライオン 最大30%必ず戻ってくる",p:"デジタルポイント600pt（必ず）",u:"https://lsp-campaign.com/homecare-receiptcp-2/lp.go", genre:"ポイント"},
+      {t:"ネピア 目黒蓮クリアファイル毎週先着",p:"オリジナルクリアファイル（先着）",u:"https://e-nepia.com/campaign/cp2025.html", genre:"物品"},
+      {t:"Kenvue えらべるPay20%還元",p:"最大2,000pt（必ず）",u:"https://campaign-ssl.com/selectpaycp/A01.php", genre:"ポイント"},
+      {t:"森のたまご キッチンタイマー必ずもらえる",p:"キッチンタイマー（必ず）",u:"https://www.tandc.inc/special/moritama-zenpre/", genre:"物品"},
+      {t:"ミューズ 500円キャッシュバック",p:"電子マネー500円（必ず）",u:"https://www.musebodywash-cashback2025.jp/", genre:"現金"},
+      {t:"エリエール Amazonギフト総額100万円山分け",p:"Amazonギフトコード（必ず参加で山分け）",u:"https://www.elleair.jp/elleair-toilet/campaign/toilet-mustbuy-2511/", genre:"ポイント"},
+      {t:"サントリー生ビール MYサン生缶必ずもらえる",p:"オリジナルサン生缶（必ず）",u:"https://mysunnamacp-can.campaign.suntory.co.jp/", genre:"物品"},
+      {t:"P&G 対象商品購入で最大1,000ポイント必ず",p:"デジタルポイント最大1,000pt（必ず）",u:"https://scj-campaign2025.belugacpn.jp/top", genre:"ポイント"},
+      {t:"モンプチ×PAUL & JOE 必ずもらえる",p:"PAUL&JOEグッズ（必ず）",u:"https://nestle.jp/brand/monpetit/campaign/kanarazu-cp-2025/", genre:"物品"},
+      {t:"伊藤園 理想のティータイム絶対もらえる",p:"ティーカップセット（必ず）",u:"https://www.itoen.jp/teatime2025/", genre:"物品"},
+      {t:"やかんの麦茶 必ずもらえるデジタルポイント",p:"Vポイント等（必ず）",u:"https://lsp-campaign.com/yakannomugicha-receiptcp-3/lp.go", genre:"ポイント"},
+      {t:"ローソン 発酵バター香るワッフル無料引換",p:"ワッフルorフィナンシェ（必ず）",u:"https://www.lawson.co.jp/lab/campaign/bread2025/", genre:"無料商品"},
+      {t:"KFC 鶏竜田バーガー無料クーポン",p:"鶏竜田バーガー（必ず）",u:"https://www.kfc.co.jp/campaign/toriryuta2025", genre:"無料商品"},
+      // AI検索による追加の実用的なキャンペーン（ウェブから収集、必ずもらえるやアンケート抽選優先）
+      {t:"THE BITTER-IST ザ・ビタリスト",p:"無料クーポン（抽選50万名、アンケート回答で）",u:"https://bitter-ist202509-campaign.belugacpn.jp/", genre:"無料商品"},
+      {t:"健康ミネラルむぎ茶 絶対もらえる",p:"賞品（必ず、応募マークで）",u:"https://www.mugicha-zettai-moraeru.jp/", genre:"物品"},
+      {t:"ハーゲンダッツ 絶対もらえるキャンペーン",p:"マイルで賞品（必ず）",u:"https://www.haagen-dazs.co.jp/campaign/special/mileage2025/", genre:"物品"},
+      {t:"キッコーマン豆乳 ディズニーペアチケット",p:"ペアチケット（抽選）",u:"https://www.k-tounyu.jp/cp/dn2025/", genre:"物品"},
+      {t:"ウィルキンソン 選ばれる刺激キャンペーン",p:"豪華景品（抽選、アンケート形式）",u:"https://www.asahiinryo.co.jp/entertainment/campaign/wilkinson/selection/", genre:"物品"},
+      {t:"ハリボー 純金ゴールドベア",p:"純金 or グッズ（抽選、LINEアンケート）",u:"https://haribo2025cp.com/", genre:"物品"},
+      {t:"キユーピー マヨネーズ100th Anniversary",p:"プレゼント（抽選）",u:"https://www.kewpie.co.jp/cp/202502-mayonnaise-100th/kewpiecollection/", genre:"物品"},
+      {t:"エースベーカリー60周年キャンペーン",p:"賞品（抽選、LINE応募）",u:"https://www.cp-lp.jp/ace-bakery_60th_thankscp/", genre:"物品"},
+      {t:"井村屋 肉まんあんまん Many Thanks",p:"JCBギフトカード or クッション（抽選）",u:"https://imuraya-cp.jp/2025_packman/", genre:"ポイント"},
+      {t:"明治のアイス宝くじキャンペーン",p:"賞品（抽選）",u:"https://www.meiji.co.jp/products/brand/cmp/close2509/", genre:"物品"},
+      {t:"キッコーマン 味わいリッチ減塩しょうゆ",p:"QUOカード（抽選）",u:"https://www.kikkoman.co.jp/kikkoman/richgenencp/", genre:"ポイント"},
+      {t:"鍋キューブ 秋冬本気の鍋まつり",p:"総額500万円山分け（必ず参加で）",u:"https://nabecube-2025cp.com/", genre:"現金"},
+      {t:"キリン 本麒麟 今日という日をうまい！で祝おう",p:"賞品（抽選）",u:"https://cp.kirin.jp/story/33532", genre:"物品"},
+      {t:"月桂冠 アルゴ PayPayポイント",p:"最大5,000円分（抽選）",u:"https://www.gekkeikan.co.jp/company/news/detail/587/", genre:"ポイント"}
     ];
 
     const kw = document.getElementById('kw');
@@ -88,10 +111,18 @@
       await new Promise(r => setTimeout(r, 1200));
 
       const lowerKeyword = keyword.toLowerCase();
-      const filtered = campaigns.filter(c => 
+      let filtered = campaigns.filter(c => 
         c.t.toLowerCase().includes(lowerKeyword) ||
-        c.p.toLowerCase().includes(lowerKeyword)
+        c.p.toLowerCase().includes(lowerKeyword) ||
+        c.genre.toLowerCase().includes(lowerKeyword)
       );
+
+      // 実用的なものを先にヒット（必ずもらえる優先ソート）
+      filtered.sort((a, b) => {
+        if (a.p.includes('必ず') && !b.p.includes('必ず')) return -1;
+        if (!a.p.includes('必ず') && b.p.includes('必ず')) return 1;
+        return 0;
+      });
 
       think.style.display = 'none';
       statusText.textContent = '';
@@ -99,23 +130,35 @@
 
       if (filtered.length === 0) {
         error.style.display = 'block';
-        error.textContent = `「${keyword}」に該当するものは見つかりませんでした（例: マクロミル / 必ずもらえる）`;
+        error.textContent = `「${keyword}」に該当する懸賞は見つかりませんでした（例: 必ずもらえる / ライオン / 現金 / ポイント）`;
         return;
       }
 
+      // ジャンルでグループ化して表示
+      const genreGroups = {};
       filtered.forEach(c => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <h3>${c.t}</h3>
-          <p>報酬/賞品：${c.p}</p>
-          <a href="${c.u}" target="_blank" class="btn" rel="noopener noreferrer">今すぐ参加 →</a>
-        `;
-        res.appendChild(card);
+        if (!genreGroups[c.genre]) genreGroups[c.genre] = [];
+        genreGroups[c.genre].push(c);
+      });
+
+      Object.keys(genreGroups).forEach(genre => {
+        const h2 = document.createElement('h2');
+        h2.textContent = genre;
+        res.appendChild(h2);
+
+        genreGroups[genre].forEach(c => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h3>${c.t}</h3>
+            <p>賞品：${c.p}</p>
+            <a href="${c.u}" target="_blank" class="btn" rel="noopener noreferrer">今すぐ応募 →</a>
+          `;
+          res.appendChild(card);
+        });
       });
     }
 
-    // HunterAIタイトルクリックでホーム（全件表示）に戻る
     function resetPage() {
       kw.value = '';
       search();
